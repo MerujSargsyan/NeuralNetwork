@@ -4,12 +4,14 @@
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
 
 float test[][2] = {
-    {1, 2},
-    {2, 4},
-    {3, 6},
-    {4, 8},
+    {1, 3},
+    {2, 6},
+    {3, 9},
+    {4, 12},
     {0, 0},
-    {5, 10},
+    {5, 15},
+    {6, 18},
+    {9, 27}
 };
 
 float cost(float guess) {
@@ -27,11 +29,11 @@ int main(void) {
     float peram1 = (float) rand() / (float) RAND_MAX;
     peram1 *= 10.0f;
 
-    float eps = 1e-2;
-    float lrn_rate = 1e-2;
+    float eps = 1e-3;
+    float lrn_rate = 1e-3;
 
     // approcimate gradient using finite difference
-    for(int i = 0; i < 100; i++) {
+    for(int i = 0; i < 500; i++) {
         float dperam = (cost(peram1 + eps) - cost(peram1))/eps;
         peram1 -= lrn_rate * dperam;
     }
