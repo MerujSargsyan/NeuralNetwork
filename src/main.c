@@ -5,14 +5,12 @@
 
 // this does not work for adding
 float test[][2] = {
-    {1, 4},
-    {2, 8},
-    {3, 12},
-    {4, 16},
-    {0, 0},
-    {5, 20},
-    {6, 24},
-    {9, 36}
+    {1, 0.25},
+    {2, 0.50},
+    {3, 0.75},
+    {4, 1},
+    {8, 2},
+    {16, 4}
 };
 
 float cost(float guess) {
@@ -39,6 +37,5 @@ int main(void) {
     }
     printf("%f\n", peram1);
 
-    free(buf);
     return 0;
 }
