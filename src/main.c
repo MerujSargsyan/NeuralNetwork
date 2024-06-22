@@ -3,26 +3,26 @@
 
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
 
+// this does not work for adding
 float test[][2] = {
-    {1, 3},
-    {2, 6},
-    {3, 9},
-    {4, 12},
+    {1, 4},
+    {2, 8},
+    {3, 12},
+    {4, 16},
     {0, 0},
-    {5, 15},
-    {6, 18},
-    {9, 27}
+    {5, 20},
+    {6, 24},
+    {9, 36}
 };
 
 float cost(float guess) {
     float result = 0.0f;
     for(int i = 0; i < test_len; i++) {
-        float diff = test[i][1] - guess * test[i][0];
+        float diff = test[i][1] - (guess * test[i][0]);
         result += diff*diff;
     }
     return result / test_len;
 }
-
 
 int main(void) {
     srand(69);
@@ -30,14 +30,15 @@ int main(void) {
     peram1 *= 10.0f;
 
     float eps = 1e-3;
-    float lrn_rate = 1e-3;
+    float lrn_rate = 1e-2;
 
     // approcimate gradient using finite difference
-    for(int i = 0; i < 500; i++) {
+    for(int i = 0; i < 200; i++) {
         float dperam = (cost(peram1 + eps) - cost(peram1))/eps;
         peram1 -= lrn_rate * dperam;
     }
     printf("%f\n", peram1);
 
+    free(buf);
     return 0;
 }
