@@ -39,7 +39,7 @@ float cost(float* params, int idx, float eps, float (*operation)(float, float)) 
     return result / test_len;
 }
 
-float rand_float() {
+float rand_float(void) {
     float output = (float) rand() / (float) RAND_MAX;
     return output * 10.0f;
 }

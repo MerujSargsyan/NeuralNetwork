@@ -2,11 +2,15 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g -std=gnu99 
 BINDIR = bin
 SRCDIR = src
+EXEC = main
 
-all: main
+default: main
 
 main: $(SRCDIR)/main.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
 
-run: main
-	$(BINDIR)/main
+logic: $(SRCDIR)/logic.c
+	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
+
+run: $(EXEC) 
+	$(BINDIR)/$<
