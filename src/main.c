@@ -4,13 +4,15 @@
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
 
 // this does not work for adding
-float test[][5] = {
-    {0, 0, 0}, 
-    {1, 1, 1},
-    {0, 1, 0},
-    {1, 0, 0},
+float test[][6] = {
+    {1, 1, 1, 1, 1, 7}, 
+    {1, 3, 7, 1, 1, 21},
+    {0, 1, 4, 2, 2, 15},
+    {1, 8, 12, 1, 3, 40},
+    {4, 8, 15, 5, 2, 51},
+    {8, 8, 19, 2, 10, 76},
 };
-int param_size = 2;
+int param_size = 5;
 
 float sum(float a, float b) {
     return a + b;
@@ -67,7 +69,7 @@ int main(void) {
     // approcimate gradient using finite difference
     for(int i = 0; i < 500; i++) {
         for(int j = 0; j < param_size; j++) {
-            float dperam = (cost(perams, j, eps, sum) - cost(perams, -1, eps, sum)) / eps;
+            float dperam = (cost(perams, j, eps, mult) - cost(perams, -1, eps, mult)) / eps;
             perams[j] -= lrn_rate * dperam;
         }
     }
