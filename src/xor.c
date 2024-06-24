@@ -99,11 +99,11 @@ Xor apply_diff(Xor m, Xor newM, float lrn_rate) {
 int main(void) {
     srand(420);
     float eps = 1e-2;
-    float lrn_rate = 1e-1;
+    float lrn_rate = 0.5;
 
     Xor m = rand_xor();
 
-    for(int i = 0; i < 1000*100; i++) {
+    for(int i = 0; i < 100*100; i++) {
         Xor newM = compute_gradient(m, eps);
         m = apply_diff(m, newM, lrn_rate);
     }
