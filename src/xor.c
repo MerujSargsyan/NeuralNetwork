@@ -23,8 +23,9 @@ float xor_test[][3] = {
     {1, 0, 1},
     {1, 1, 0}
 };
-// construct xor from or, nand, and
+
 typedef struct {
+    // formatted as: or_params[3], nand_params[3], and_params[3]
     float params[9];
 } Xor;
 
@@ -37,7 +38,7 @@ float map_outputf(float output) {
 float forward(Xor m, float x, float y) {
     float a = map_outputf(m.params[0] * x + m.params[1] * y + m.params[2]);
     float b = map_outputf(m.params[3] * x + m.params[4] * y + m.params[5]);
-    return map_outputf(m.params[6]* a + m.params[7] * b + m.params[8]);
+    return map_outputf(m.params[6] * a + m.params[7] * b + m.params[8]);
 }
 
 float cost(Xor m) {
@@ -101,7 +102,6 @@ int main(void) {
     float lrn_rate = 1e-1;
 
     Xor m = rand_xor();
-    print_xor(m);
 
     for(int i = 0; i < 1000*100; i++) {
         Xor newM = compute_gradient(m, eps);
