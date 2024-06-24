@@ -91,7 +91,7 @@ void print_xor(Xor m) {
 
 Xor apply_diff(Xor m, Xor newM, float lrn_rate) {
     for(int i = 0; i < param_count; i++) {
-        m.params[i] -= lrn_rate*newM.params[i];
+       m.params[i] -= lrn_rate*newM.params[i];
     }
     return m;
 }
