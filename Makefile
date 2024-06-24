@@ -12,5 +12,8 @@ main: $(SRCDIR)/main.c
 logic: $(SRCDIR)/logic.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
 
+xor: $(SRCDIR)/xor.c
+	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
+
 run: $(EXEC) 
 	$(BINDIR)/$<

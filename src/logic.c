@@ -54,7 +54,6 @@ int main(void) {
         p2 -= lrn_rate*dp2;
         bias -= lrn_rate*dbias;
     }
-    printf("p1: %f,p2: %f,c: %f, bias: %f\n", p1, p2, cost(p1, p2, bias), bias);
 
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 2; j++) {
