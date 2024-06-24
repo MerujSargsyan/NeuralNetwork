@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
 
 // this does not work for adding
