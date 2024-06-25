@@ -3,15 +3,16 @@
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
 
 // this does not work for adding
-float test[][6] = {
-    {1, 1, 1, 1, 1, 7}, 
-    {1, 3, 7, 1, 1, 21},
-    {0, 1, 4, 2, 2, 15},
-    {1, 8, 12, 1, 3, 40},
-    {4, 8, 15, 5, 2, 51},
-    {8, 8, 19, 2, 10, 76},
+float test[][3] = {
+    {1, 1, 5},
+    {5, 2, 16},
+    {3, 2, 12},
+    {1, 8, 26},
+    {2, 4, 16},
+    {2, 2, 10},
+    {1, 4, 14},
 };
-int param_size = 5;
+int param_size = 2;
 
 float sum(float a, float b) {
     return a + b;

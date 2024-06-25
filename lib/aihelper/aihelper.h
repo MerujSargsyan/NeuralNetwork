@@ -1,5 +1,5 @@
 #ifndef AIHELPER_H
-#define AIHELPER_h
+#define AIHELPER_H
 typedef struct  {
     float* weights;
     float bias;
@@ -13,7 +13,7 @@ typedef struct {
 
 Model compute_gradient(Model m, float eps, float (*cost)(Model));
 float sigmoid(float input);
-float rand_init(float* arr);
-void teach_model(Model* learned, Model* teacher, float lrn_rate);
+void teach_model(Model* learner, Model* teacher, float lrn_rate);
+Model init_model(int param_count, int weight_count);
 
 #endif

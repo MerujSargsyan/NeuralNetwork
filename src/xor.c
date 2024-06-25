@@ -9,20 +9,11 @@
 *
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include "aihelper.h"
 
 #define xor_test_len (int)(sizeof(xor_test) / sizeof(xor_test[0]))
 #define param_count 9
-
-float xor_test[][3] = {
-    {0, 0, 0},
-    {0, 1, 1},
-    {1, 0, 1},
-    {1, 1, 0}
-};
+#define weight_count 3
 
 typedef struct {
     // formatted as: or_params[3], nand_params[3], and_params[3]
@@ -43,6 +34,14 @@ float forward(Xor m, float x, float y) {
 
 float cost(Xor m) {
     float result = 0.0f;
+
+    float xor_test[][3] = {
+        {0, 0, 0},
+        {0, 1, 1},
+        {1, 0, 1},
+        {1, 1, 0}
+    };
+
     for(int i = 0; i < xor_test_len; i++) {
         float x1 = xor_test[i][0];
         float x2 = xor_test[i][1];
@@ -97,15 +96,14 @@ Xor apply_diff(Xor m, Xor newM, float lrn_rate) {
 }
 
 int main(void) {
-    srand(420);
     float eps = 1e-2;
     float lrn_rate = 0.5;
 
-    Xor m = rand_xor();
+    Model m = init_model(param_count, weight_count);
 
     for(int i = 0; i < 100*100; i++) {
-        Xor newM = compute_gradient(m, eps);
-        m = apply_diff(m, newM, lrn_rate);
+        Model newM = compute_gradient(m, eps, cost);
+        teach_model(&m, &newM, lrn_rate);
     }
 
     for(int i = 0; i < 2; i++) {
