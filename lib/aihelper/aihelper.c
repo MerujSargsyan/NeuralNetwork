@@ -4,25 +4,6 @@
 #include <time.h>
 #include <stdio.h>
 
-Model compute_gradient(Model m, float eps, float (*cost)(Model)) {
-    Model newM;
-    float c = cost(m);
-
-    Cell saved;
-
-    for(int i = 0; i < m.param_count; i++) {
-        Cell current = m.params[i];
-        for(int j = 0; j < current.weight_count; j++) {
-            saved = m.params[i];
-            m.params[i].weights[j] += eps;
-            newM.params[i].weights[j] = (cost(m) - c)/eps;
-            m.params[i] = saved;
-        }
-    }
-
-    return newM;
-}
-
 float sigmoid(float input) {
     return 1.0f/(1.0f + expf(input));
 }
