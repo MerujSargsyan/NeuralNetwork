@@ -10,7 +10,9 @@
 */
 
 #include "aihelper.h"
+#include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #define xor_test_len (int)(sizeof(xor_test) / sizeof(xor_test[0]))
 #define PARAM_COUNT 3
@@ -81,7 +83,8 @@ Xor apply_diff(Xor m, Xor newM, float lrn_rate) {
 }*/
 
 int main(void) {
-    float eps = 1e-2;
+    srand(time(0));
+    float eps = 1e-1;
     float lrn_rate = 0.5;
 
     Model m = init_model(PARAM_COUNT, WEIGHT_COUNT);

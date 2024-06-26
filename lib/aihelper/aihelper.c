@@ -22,9 +22,9 @@ void rand_init(float* arr, int arr_len) {
 void teach_model(Model* learner, Model* teacher, float lrn_rate) {
     if(learner->param_count != teacher->param_count) return;
     for(int i = 0; i < learner->param_count; i++) {
-
         Cell* currentL = learner->params + i;
         Cell* currentT = teacher->params + i;
+
         if(currentL->weight_count != currentT->weight_count) {
             printf("Unmatched weight counts");
         }
@@ -42,10 +42,10 @@ Model init_model(int param_count, int weight_count) {
     m.params = malloc(sizeof(Cell) * param_count);
     for(int i = 0; i < param_count; i++) {
         Cell c;
+        c.weight_count = weight_count;
         c.weights = malloc(sizeof(float) * weight_count);
         rand_init(c.weights, c.weight_count);
         c.bias = rand_float();
-        c.weight_count = weight_count;
         m.params[i] = c;
     }
     return m;
