@@ -39,6 +39,7 @@ void teach_model(Model* learner, Model* teacher, float lrn_rate) {
 
 Model init_model(int param_count, int weight_count) {
     Model m;
+    m.param_count = param_count;
     m.params = malloc(sizeof(Cell) * param_count);
     for(int i = 0; i < param_count; i++) {
         Cell c;

@@ -67,20 +67,17 @@ Model compute_gradient(Model m, float eps) {
     return newM;
 }
 
-/*Xor rand_xor() {
-    Xor m;
-    for(int i = 0; i < param_count; i++) {
-        m.params[i] = rand_float();
+void print_model(Model m) {
+    for(int c = 0; c < m.param_count; c++) {
+        printf("Cell %d:", c+1);
+        Cell cell = m.params[c];
+        for(int w = 0; w < cell.weight_count; w++) {
+            printf(" weight %d: %f ", w+1, cell.weights[w]);
+            printf(" bias: %f", cell.bias);
+        }
+        printf("\n");
     }
-    return m;
 }
-
-Xor apply_diff(Xor m, Xor newM, float lrn_rate) {
-    for(int i = 0; i < param_count; i++) {
-       m.params[i] -= lrn_rate*newM.params[i];
-    }
-    return m;
-}*/
 
 int main(void) {
     srand(time(0));
@@ -89,10 +86,13 @@ int main(void) {
 
     Model m = init_model(PARAM_COUNT, WEIGHT_COUNT);
 
+    printf("param count: %d\n", m.param_count);
     for(int i = 0; i < 100*100; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
+        print_model(m);
     }
+
 
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 2; j++) {
