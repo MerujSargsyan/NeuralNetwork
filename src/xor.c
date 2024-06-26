@@ -62,12 +62,17 @@ Model compute_gradient(Model m, float eps) {
             newM.params[i].weights[j] = (cost(m) - c)/eps;
             m.params[i].weights[j] = saved;
         }
+        saved = m.params[i].bias;
+        m.params[i].bias += eps;
+        newM.params[i].bias = (cost(m) - c)/eps;
+        m.params[i].bias = saved;
     }
 
     return newM;
 }
 
 void print_model(Model m) {
+    printf("------------------------------\n");
     for(int c = 0; c < m.param_count; c++) {
         printf("Cell %d:", c+1);
         Cell cell = m.params[c];
@@ -77,6 +82,7 @@ void print_model(Model m) {
         }
         printf("\n");
     }
+    printf("------------------------------\n");
 }
 
 int main(void) {
@@ -90,10 +96,9 @@ int main(void) {
     for(int i = 0; i < 100*100; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
-        print_model(m);
     }
 
-
+    print_model(m);
     for(int i = 0; i < 2; i++) {
         for(int j = 0; j < 2; j++) {
             printf("%d | %d: %f \n", i, j, forward(m, i, j));

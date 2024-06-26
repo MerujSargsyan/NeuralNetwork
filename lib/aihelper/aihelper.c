@@ -20,20 +20,24 @@ void rand_init(float* arr, int arr_len) {
 }
 
 void teach_model(Model* learner, Model* teacher, float lrn_rate) {
-    if(learner->param_count != teacher->param_count) return;
+    if(learner->param_count != teacher->param_count) {
+        printf("Parmeter size mistach\n");
+        return;
+    }
     for(int i = 0; i < learner->param_count; i++) {
         Cell* currentL = learner->params + i;
         Cell* currentT = teacher->params + i;
 
         if(currentL->weight_count != currentT->weight_count) {
             printf("Unmatched weight counts");
+            return;
         }
 
         for(int j = 0; j < currentL->weight_count; j++) {
             currentL->weights[j] -= lrn_rate*currentT->weights[j];
         }
+        currentL->bias -= currentT->bias;
 
-        currentT->bias -= currentL->bias;
     }
 }
 
