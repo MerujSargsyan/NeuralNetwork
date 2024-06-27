@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g -std=gnu99 
 BINDIR = bin
 SRCDIR = src
-EXEC = main
+EXEC = equation 
 HDIR = lib/aihelper
 
 default: equation
