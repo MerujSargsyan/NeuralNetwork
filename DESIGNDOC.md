@@ -19,9 +19,9 @@
 </ul>
 
 <h3> Process: </h3>
-<ol>
-    <li> Use numbers to get a basic understanding of how to build a model </li>
-    <li> Proceed to use the model to guess characters instead of numbers </li>
-    <li> Then connect the characters to strings and hopefully to paragraphs</li>
-    <li> After, allow the model to use given data from a file and answer prompts that way </li>
-</ol>
+<input type="checkbox">
+    <label> Use numbers to get a basic understanding of how to build a model </label>
+    <label> Proceed to use the model to guess characters instead of numbers </label>
+    <label> Then connect the characters to strings and hopefully to paragraphs</label>
+    <label> After, allow the model to use given data from a file and answer prompts that way </label>
+</input>
