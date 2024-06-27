@@ -5,9 +5,9 @@ SRCDIR = src
 EXEC = main
 HDIR = lib/aihelper
 
-default: main
+default: equation
 
-main: $(SRCDIR)/main.c
+equation: $(SRCDIR)/equation.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
 
 logic: $(SRCDIR)/logic.c
