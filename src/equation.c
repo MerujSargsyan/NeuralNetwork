@@ -32,7 +32,6 @@ float cost(Model m, float (*operation)(float, float)) {
             float current = c.weights[w];
             total += operation(current, test[i][w]);
         }
-        total += c.bias;
         float diff = test[i][WEIGHT_COUNT] - total;
         result += diff*diff;
     }
@@ -41,6 +40,7 @@ float cost(Model m, float (*operation)(float, float)) {
 
 Model compute_gradient(Model m, float eps) {
     Model newM = init_model(1, WEIGHT_COUNT);
+    newM.params[0].bias = 0;
     float c = cost(m, mult);
     float saved;
 
@@ -51,27 +51,24 @@ Model compute_gradient(Model m, float eps) {
         newM.params[0].weights[w] = (cost(m, mult) - c)/eps;
         m.params[0].weights[w] = saved;
     }
-    saved = cell.bias;
-    m.params[0].bias += eps;
-    newM.params[0].bias = (cost(m, mult) - c)/eps;
-    m.params[0].bias = saved;
-
+    
     return newM;
 }
 
 int main(void) {
     srand(69);
     Model m = init_model(1, WEIGHT_COUNT);
+    m.params[0].bias = 0;
 
     float eps = 1e-3;
     float lrn_rate = 1e-2;
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < 100; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
-        print_model(m);
     }
 
+    print_model(m);
     printf("%f\n", cost(m, mult));
 
     return 0;

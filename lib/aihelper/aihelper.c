@@ -59,8 +59,8 @@ void print_model(Model m) {
         Cell cell = m.params[c];
         for(int w = 0; w < cell.weight_count; w++) {
             printf(" weight %d: %f ", w+1, cell.weights[w]);
-            printf(" bias: %f", cell.bias);
         }
+        printf(" bias: %f", cell.bias);
         printf("\n");
     }
     printf("------------------------------\n");

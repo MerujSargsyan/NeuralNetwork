@@ -16,5 +16,10 @@ logic: $(SRCDIR)/logic.c
 xor: $(SRCDIR)/xor.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< -I$(HDIR) lib/aihelper/aihelper.o
 
+lib: aihelper.o
+
+%.o: $(HDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $(HDIR)/$@
+
 run: $(EXEC) 
 	$(BINDIR)/$<

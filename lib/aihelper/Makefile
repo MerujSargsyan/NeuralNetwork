@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-all: aihelper
+all: aihelper.o
 
-aihelper: aihelper.c
+%.o: %.c
 	$(CC) $(CFLAGS) -c $<
