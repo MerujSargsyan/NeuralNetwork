@@ -11,9 +11,9 @@ equation: $(SRCDIR)/equation.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
 
 logic: $(SRCDIR)/logic.c
-	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
+	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< -I$(HDIR) lib/aihelper/aihelper.o
 
-xor: $(SRCDIR)/xor.c $(HDIR)/aihelper.o
+xor: $(SRCDIR)/xor.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< -I$(HDIR) lib/aihelper/aihelper.o
 
 run: $(EXEC) 

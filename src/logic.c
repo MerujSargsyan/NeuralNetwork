@@ -17,7 +17,7 @@ float cost(Model m) {
         float x1 = test[i][0];
         float x2 = test[i][1];
         Cell c = m.params[0];
-        float y = sigmoid(x1 * c.weights[0] + x2 * c.params[1] + c.bias);
+        float y = sigmoid(x1 * c.weights[0] + x2 * c.weights[1] + c.bias);
         float diff = test[i][2] - y;
         result += diff*diff;
     }
