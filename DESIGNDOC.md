@@ -19,9 +19,11 @@
 </ul>
 
 <h3> Process: </h3>
-<input type="checkbox">
-    <label> Use numbers to get a basic understanding of how to build a model </label>
-    <label> Proceed to use the model to guess characters instead of numbers </label>
-    <label> Then connect the characters to strings and hopefully to paragraphs</label>
-    <label> After, allow the model to use given data from a file and answer prompts that way </label>
-</input>
+<form>
+    <input type="checkbox" id="processes">
+        <label for="processes"> Use numbers to get a basic understanding of how to build a model </label>
+        <label for="processes"> Proceed to use the model to guess characters instead of numbers </label>
+        <label for="processes"> Then connect the characters to strings and hopefully to paragraphs</label>
+        <label for="processes"> After, allow the model to use given data from a file and answer prompts that way </label>
+    </input>
+</form>
