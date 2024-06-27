@@ -1,8 +1,4 @@
 #include "aihelper.h"
-#include <math.h>
-#include <stdlib.h>
-#include <time.h>
-#include <stdio.h>
 
 float sigmoid(float input) {
     return 1.0f/(1.0f + expf(input));
@@ -56,5 +52,16 @@ Model init_model(int param_count, int weight_count) {
     return m;
 }
 
-
-
+void print_model(Model m) {
+    printf("------------------------------\n");
+    for(int c = 0; c < m.param_count; c++) {
+        printf("Cell %d:", c+1);
+        Cell cell = m.params[c];
+        for(int w = 0; w < cell.weight_count; w++) {
+            printf(" weight %d: %f ", w+1, cell.weights[w]);
+            printf(" bias: %f", cell.bias);
+        }
+        printf("\n");
+    }
+    printf("------------------------------\n");
+}
