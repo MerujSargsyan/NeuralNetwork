@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "aihelper.h"
+
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
+#define WEIGHT_COUNT 2
 
 // this does not work for adding
 float test[][3] = {
@@ -12,70 +13,66 @@ float test[][3] = {
     {2, 2, 10},
     {1, 4, 14},
 };
-int param_size = 2;
 
 float sum(float a, float b) {
     return a + b;
 }
+
 float mult(float a, float b) {
     return a * b;
 }
 
 // isolate index of current guess
-float cost(float* params, int idx, float eps, float (*operation)(float, float)) {
+float cost(Model m, float (*operation)(float, float)) {
     float result = 0.0f;
     for(int i = 0; i < test_len; i++) {
         float total = 0.0f;
-        for(int j = 0; j < param_size; j++) {
-            float current = params[j];
-            if(j == idx) {
-                current += eps;
-            }
-            total += operation(current, test[i][j]);
+        Cell c = m.params[0];
+        for(int w = 0; w < c.weight_count; w++) {
+            float current = c.weights[w];
+            total += operation(current, test[i][w]);
         }
-        float diff = test[i][param_size] - total;
+        total += c.bias;
+        float diff = test[i][WEIGHT_COUNT] - total;
         result += diff*diff;
     }
     return result / test_len;
 }
 
-float rand_float(void) {
-    float output = (float) rand() / (float) RAND_MAX;
-    return output * 10.0f;
-}
+Model compute_gradient(Model m, float eps) {
+    Model newM = init_model(1, WEIGHT_COUNT);
+    float c = cost(m, mult);
+    float saved;
 
-float* generate_perams(int num) {
-    float* arr = malloc(sizeof(float) * num);
-    for(int i = 0; i < num; i++) {
-        arr[i] = rand_float();
+    Cell cell = m.params[0];
+    for(int w = 0; w < cell.weight_count; w++) {
+        saved = cell.weights[w];
+        m.params[0].weights[w] += eps;
+        newM.params[0].weights[w] = (cost(m, mult) - c)/eps;
+        m.params[0].weights[w] = saved;
     }
-    return arr;
-}
+    saved = cell.bias;
+    m.params[0].bias += eps;
+    newM.params[0].bias = (cost(m, mult) - c)/eps;
+    m.params[0].bias = saved;
 
-void print_perams(float* perams) {
-    for(int i = 0; i < param_size; i++) {
-        printf("%f ", perams[i]);
-    }
-    printf("\n");
+    return newM;
 }
 
 int main(void) {
     srand(69);
-    float* perams = generate_perams(param_size);
+    Model m = init_model(1, WEIGHT_COUNT);
 
     float eps = 1e-3;
     float lrn_rate = 1e-2;
 
-    // approcimate gradient using finite difference
-    for(int i = 0; i < 500; i++) {
-        for(int j = 0; j < param_size; j++) {
-            float dperam = (cost(perams, j, eps, mult) - cost(perams, -1, eps, mult)) / eps;
-            perams[j] -= lrn_rate * dperam;
-        }
+    for(int i = 0; i < 10; i++) {
+        Model newM = compute_gradient(m, eps);
+        teach_model(&m, &newM, lrn_rate);
+        print_model(m);
     }
 
-    print_perams(perams);
-    free(perams);
+    printf("%f\n", cost(m, mult));
 
     return 0;
 }

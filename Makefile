@@ -8,7 +8,7 @@ HDIR = lib/aihelper
 default: equation
 
 equation: $(SRCDIR)/equation.c
-	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $<
+	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< -I$(HDIR) lib/aihelper/aihelper.o
 
 logic: $(SRCDIR)/logic.c
 	$(CC) $(CFLAGS) -o $(BINDIR)/$@ $< -I$(HDIR) lib/aihelper/aihelper.o
