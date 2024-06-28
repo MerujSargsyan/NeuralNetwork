@@ -1,17 +1,14 @@
 #include "aihelper.h"
 
 #define test_len (int)(sizeof(test) / sizeof(test[0]))
-#define WEIGHT_COUNT 2
+#define WEIGHT_COUNT 1
 
 // this does not work for adding
 float test[][3] = {
-    {1, 1, 5},
-    {5, 2, 16},
-    {3, 2, 12},
-    {1, 8, 26},
-    {2, 4, 16},
-    {2, 2, 10},
-    {1, 4, 14},
+    {'a', 'd'},
+    {'b', 'e'},
+    {'c', 'f'},
+    {'d', 'g'},
 };
 
 float sum(float a, float b) {
@@ -41,14 +38,14 @@ float cost(Model m, float (*operation)(float, float)) {
 Model compute_gradient(Model m, float eps) {
     Model newM = init_model(1, WEIGHT_COUNT);
     newM.params[0].bias = 0;
-    float c = cost(m, mult);
+    float c = cost(m, sum);
     float saved;
 
     Cell cell = m.params[0];
     for(int w = 0; w < cell.weight_count; w++) {
         saved = cell.weights[w];
         m.params[0].weights[w] += eps;
-        newM.params[0].weights[w] = (cost(m, mult) - c)/eps;
+        newM.params[0].weights[w] = (cost(m, sum) - c)/eps;
         m.params[0].weights[w] = saved;
     }
     
@@ -63,13 +60,13 @@ int main(void) {
     float eps = 1e-3;
     float lrn_rate = 1e-2;
 
-    for(int i = 0; i < 100; i++) {
+    for(int i = 0; i < 500; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
     }
 
     print_model(m);
-    printf("%f\n", cost(m, mult));
+    printf("%f\n", cost(m, sum));
 
     return 0;
 }
