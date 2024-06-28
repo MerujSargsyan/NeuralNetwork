@@ -84,6 +84,7 @@ int main(void) {
     for(int i = 0; i < 1500*150; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
+        free_model(newM);
     }
 
     print_model(m);
@@ -92,4 +93,6 @@ int main(void) {
             printf("%d | %d: %f \n", i, j, forward(m, i, j));
         }
     }
+
+    free_model(m);
 }

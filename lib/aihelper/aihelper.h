@@ -61,4 +61,6 @@ Model init_model(int param_count, int weight_count);
  */
 void print_model(Model m);
 
+void free_model(Model m);
+
 #endif

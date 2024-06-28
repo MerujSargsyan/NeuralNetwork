@@ -63,10 +63,12 @@ int main(void) {
     for(int i = 0; i < 500; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
+        free_model(newM);
     }
 
     print_model(m);
     printf("%f\n", cost(m, sum));
 
+    free_model(m);
     return 0;
 }

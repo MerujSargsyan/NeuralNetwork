@@ -65,3 +65,10 @@ void print_model(Model m) {
     }
     printf("------------------------------\n");
 }
+
+void free_model(Model m) {
+    for(int p = 0; p < m.param_count; p++) {
+        free(m.params[p].weights);
+    }
+    free(m.params);
+}

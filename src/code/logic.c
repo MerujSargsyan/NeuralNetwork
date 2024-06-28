@@ -55,6 +55,7 @@ int main(void) {
     for(int i = 0; i < 100*100; i++) {
         Model newM = compute_gradient(m, eps);
         teach_model(&m, &newM, lrn_rate);
+        free_model(newM);
     }
 
     Cell c = m.params[0];
@@ -64,5 +65,6 @@ int main(void) {
         }
     }
 
+    free_model(m);
     return 0;
 }
