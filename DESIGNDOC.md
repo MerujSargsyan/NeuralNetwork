@@ -28,15 +28,16 @@
 <h3> Notes: </h3>
 <p>
     Throughout my research for this project I discovered a neural network model which is used for
-    language input and output called Seq2Seq. I will use this model in "Encoding and Decoding" the 
-    user input with the expected output.<br>
+    language<br> input and output called Seq2Seq. I will use this model in "Encoding and Decoding" the 
+    user input with the expected <br> output.
 </p>
 <p>
-    The Seq2Seq model is a version of a simpler model called <i> Long Short-Term Memory <br> (LSTM) </i>
-    which uses different threads of "memory," a short term memory thread and a long therm memory <br>
+    The Seq2Seq model is a version of a simpler model called <b><i> Long Short-Term Memory (LSTM) </i></b>
+    which uses different <br> threads of "memory," a short term memory thread and a long therm memory
     thread. <br>
-    I will try implementing this model first to become more familiar with the idea of multi <br>
-    output models which is key for Seq2Seq models.<br>
+    <br>
+    I will try implementing this model first to become more familiar with the idea of multi
+    output models <br> which is key for Seq2Seq models.
 </p>
 <p>
     While researching and learning about the <b> LSTM </b> model, I found that it is necessary to <br>
@@ -44,18 +45,10 @@
     of input values.
 </p>
 
-The two following <b> activation functions </b> will be used:
-<ul>
-    <li>
-    $$
-    Tanh Funciton:
-    f(x) = \frac{exp(x) - exp(-x)}{exp(x) + exp(-x)}
-    $$
-    </li>
-    <li>
-    $$
-    Sigmoid Function:
-    f(x) = \frac{exp(x)}{exp(x) + 1}
-    $$
-    </li>
-</ul>
+The two following <b> activation functions </b> will be used: <br>
+<li>
+    Sigmoid Function: https://en.wikipedia.org/wiki/Sigmoid_function
+</li>
+<li>
+    Tanh Function: https://paperswithcode.com/method/tanh-activation
+</li>
