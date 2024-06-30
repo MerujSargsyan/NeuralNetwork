@@ -38,6 +38,11 @@
     I will try implementing this model first to become more familiar with the idea of multi <br>
     output models which is key for Seq2Seq models.<br>
 </p>
+<p>
+    While researching and learning about the <b> LSTM </b> model, I found that it is necessary to <br>
+    learn and understand the <b><i> Reccurent neural Network </i></b> which use a varied size <br>
+    of input values.
+</p>
 
 The two following <b> activation functions </b> will be used:
 <ul>
